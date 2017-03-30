@@ -25,6 +25,22 @@ get_turnout_2016_if_2012_d <- function(data, zip_vector) {
   return(ratio)
 }
 
+
+get_turnout_2016_by_age <- function(data, zip_vector, min_age, max_age) {
+  candidates <- subset(data, zip %in% zip_vector & age >= min_age & age <= max_age)
+  voted <- subset(candidates, turn.2016.gen == "Y")
+  turnout <- nrow(voted) / nrow(candidates)
+  return(turnout)  
+}
+
+get_turnout_2016_by_exact_age <- function(data, zip_vector, exact_age) {
+  candidates <- subset(data, zip %in% zip_vector & age >= exact_age)
+  voted <- subset(candidates, turn.2016.gen == "Y")
+  turnout <- nrow(voted) / nrow(candidates)
+  return(turnout)  
+}
+
+
 get_inner_zips <- function(zip_data, state) {
   zip_row <- zip_data[zip_data$State == state,]
   inner_zip_list_string <- zip_row$Inner.ZIPs
