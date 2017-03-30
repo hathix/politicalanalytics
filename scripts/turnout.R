@@ -34,7 +34,7 @@ get_turnout_2016_by_age <- function(data, zip_vector, min_age, max_age) {
 }
 
 get_turnout_2016_by_exact_age <- function(data, zip_vector, exact_age) {
-  candidates <- subset(data, zip %in% zip_vector & age >= exact_age)
+  candidates <- subset(data, zip %in% zip_vector & age == exact_age)
   voted <- subset(candidates, turn.2016.gen == "Y")
   turnout <- nrow(voted) / nrow(candidates)
   return(turnout)  
@@ -62,3 +62,7 @@ get_dem_percent <- function(data, zip_vector) {
   ratio <- num_dems / (num_dems + num_reps)
   return(ratio)
 }
+
+
+
+ages <- seq(1:100)
